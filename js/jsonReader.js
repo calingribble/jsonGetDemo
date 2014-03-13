@@ -20,9 +20,9 @@ $(document).ready(function () {
     $.get('http://ec2-54-81-14-120.compute-1.amazonaws.com/api/dummyview', function (objects) {
       for (i in objects) {
         var object = objects[i];
-        var builder;
+        var builder = map[object.viewType];
 
-        if (['editBox', 'button'].indexOf(object.viewType) > -1 && builder = map[object.viewType]) {
+        if (typeof builder == 'function' ) {
           $('#content .form-horizontal').append(builder(object, i));
         } else {
           $('#content .form-horizontal').append('<p>Invalid type has been read.</p>');
